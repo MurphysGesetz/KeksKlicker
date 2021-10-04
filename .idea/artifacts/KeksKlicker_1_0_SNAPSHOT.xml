@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="KeksKlicker-1.0-SNAPSHOT">
+    <output-path>$USER_HOME$/Desktop/Server/Spigot/plugins</output-path>
+    <root id="archive" name="KeksKlicker-1.0-SNAPSHOT.jar">
+      <element id="module-output" name="KeksKlicker - Murphy" />
+    </root>
+  </artifact>
+</component>
