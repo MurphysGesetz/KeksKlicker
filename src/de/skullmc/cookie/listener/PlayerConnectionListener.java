@@ -16,8 +16,8 @@ public class PlayerConnectionListener implements Listener {
 
     @EventHandler
     public void handlePlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-        CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().create(player);
+        final Player player = event.getPlayer();
+        final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().create(player);
         cookiePlayer.updateUpgradeInventory();
         cookiePlayer.updateAchievmentInventory();
         if (!plugin.getMySQLTableHelper().playerExists(player.getUniqueId())) {

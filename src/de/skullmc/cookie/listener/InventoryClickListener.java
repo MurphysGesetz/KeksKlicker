@@ -5,6 +5,7 @@ import de.skullmc.cookie.player.CookiePlayer;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
@@ -16,7 +17,7 @@ public class InventoryClickListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void handleInventoryClick(InventoryClickEvent event) {
         if (event.getCurrentItem() == null) return;
         final int clickedSlot = event.getSlot();
@@ -33,7 +34,7 @@ public class InventoryClickListener implements Listener {
                     player.playSound(player.getLocation(), Sound.BURP, 1L, 1L);
                 }
                 break;
-            case "§6▰§e▰ erfolge §8▰ §7auswahl":
+            case "§6▰§e▰ erfolge §8▰ §7einsehen":
                 event.setCancelled(true);
                 if (clickedSlot == 49) {
                     player.openInventory(plugin.getInventoryLoader().getCookieMenu());

@@ -34,15 +34,15 @@ public class PlayerInteractListener implements Listener {
 
     public PlayerInteractListener(Cookie plugin) {
         this.achievments = Arrays.asList(100, 1000, 10000, 50000, 100000, 250000, 500000, 1000000, 10000000, 1000000000);
-        this.achievmentName = Arrays.asList("Keks Lehrling", "Keks Dieb", "Keks Ernter", "Alles meine!",
-                "Keine Hobbies", "Keks Meister", "Ich bekomme sie alle!", "Finger brennt!", "Keks Gott", "KeksKlicker durchgespielt");
+        this.achievmentName = Arrays.asList("Keks-Lehrling", "Keks-Dieb", "Keks-Ernter", "Alles meine!",
+                "Keine Hobbies", "Meister der Kekse", "Ich bekomme sie alle!", "Finger brennt!", "Gott der Kekse", "KeksKlicker durchgespielt");
         this.plugin = plugin;
         this.random = ThreadLocalRandom.current();
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void handlePlayerInteract(PlayerInteractEvent event) {
-        boolean result = (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_AIR) || !plugin.getLocations().getCookieLocation().equals(event.getClickedBlock().getLocation()));
+        final boolean result = (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_AIR) || !plugin.getLocations().getCookieLocation().equals(event.getClickedBlock().getLocation()));
         if (result) return;
 
         final Player player = event.getPlayer();
@@ -94,7 +94,7 @@ public class PlayerInteractListener implements Listener {
                 animationRunning = false;
                 Bukkit.getScheduler().cancelTask(taskID);
             } else {
-                Location armorStandLocation = armorStand.getLocation();
+                final Location armorStandLocation = armorStand.getLocation();
                 armorStand.teleport(new Location(armorStand.getWorld(), armorStandLocation.getX(), armorStandLocation.getY() + 0.075, armorStandLocation.getZ(), armorStandLocation.getYaw() + 15, 0));
                 Particles particles = new Particles(EnumParticle.FLAME, armorStandLocation.add(0, 0.42, 0), true, 0.05F, 0F, 0.05F, 0, 2);
                 particles.sendAll();

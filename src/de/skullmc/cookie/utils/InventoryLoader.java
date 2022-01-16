@@ -26,21 +26,21 @@ public class InventoryLoader {
     }
 
     private void loadAchievmentItemStacks() {
-        String skullTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQwNjNiYTViMTZiNzAzMGEyMGNlNmYwZWE5NmRjZDI0YjA2NDgzNmY1NzA0NTZjZGJmYzllODYxYTc1ODVhNSJ9fX0=";
-        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks Lehrling").setLore("§7Farme §e100 §7Kekse.").setSkullTexture(skullTexture).build());
-        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks Dieb").setLore("§7Farme §e1.000 §7Kekse.").setSkullTexture(skullTexture).build());
-        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks Ernter").setLore("§7Farme §e10.000 §7Kekse.").setSkullTexture(skullTexture).build());
+        final String skullTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMzQwNjNiYTViMTZiNzAzMGEyMGNlNmYwZWE5NmRjZDI0YjA2NDgzNmY1NzA0NTZjZGJmYzllODYxYTc1ODVhNSJ9fX0=";
+        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks-Lehrling").setLore("§7Farme §e100 §7Kekse.").setSkullTexture(skullTexture).build());
+        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks-Dieb").setLore("§7Farme §e1.000 §7Kekse.").setSkullTexture(skullTexture).build());
+        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks-Ernter").setLore("§7Farme §e10.000 §7Kekse.").setSkullTexture(skullTexture).build());
         achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Alles meine!").setLore("§7Farme §e50.000 §7Kekse.").setSkullTexture(skullTexture).build());
         achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keine Hobbies").setLore("§7Farme §e100.000 §7Kekse.").setSkullTexture(skullTexture).build());
-        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks Meister").setLore("§7Farme §e250.000 §7Kekse.").setSkullTexture(skullTexture).build());
+        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Meister der Kekse").setLore("§7Farme §e250.000 §7Kekse.").setSkullTexture(skullTexture).build());
         achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Ich bekomme sie alle!").setLore("§7Farme §e500.000 §7Kekse.").setSkullTexture(skullTexture).build());
         achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Finger brennt!").setLore("§7Farme §e1.000.000 §7Kekse.").setSkullTexture(skullTexture).build());
-        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Keks Gott").setLore("§7Farme §e10.000.000 §7Kekse.").setSkullTexture(skullTexture).build());
+        achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ Gott der Kekse").setLore("§7Farme §e10.000.000 §7Kekse.").setSkullTexture(skullTexture).build());
         achievmentItemStacks.add(new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§6▰§e▰ KeksKlicker durchgespielt").setLore("§7Farme §e1.000.000.000 §7Kekse.").setSkullTexture(skullTexture).build());
     }
 
     private Inventory loadCookieUpgrades() {
-        Inventory cookieUpgrades = Bukkit.createInventory(null, 6 * 9, "§6▰§e▰ Verbessern §8▰ §7Auswahl");
+        final Inventory cookieUpgrades = Bukkit.createInventory(null, 6 * 9, "§6▰§e▰ Verbessern §8▰ §7Auswahl");
         for (int i = 0; i < 54; i++) {
             cookieUpgrades.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 7).setName("§7").build());
         }
@@ -49,7 +49,7 @@ public class InventoryLoader {
     }
 
     private Inventory loadCookieMenu() {
-        Inventory cookieMenu = Bukkit.createInventory(null, 3 * 9, "§6▰§e▰ Keks §8▰ §7Auswahl");
+        final Inventory cookieMenu = Bukkit.createInventory(null, 3 * 9, "§6▰§e▰ Keks §8▰ §7Auswahl");
         for (int i = 0; i < 27; i++) {
             cookieMenu.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 7).setName("§7").build());
         }
@@ -59,21 +59,27 @@ public class InventoryLoader {
     }
 
     private Inventory loadCookieAchievments() {
-        Inventory cookieAchievments = Bukkit.createInventory(null, 6 * 9, "");
+        final String skullTexture = "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=";
+        final Inventory cookieAchievments = Bukkit.createInventory(null, 6 * 9, "");
         for (int i = 0; i < 54; i++) {
             cookieAchievments.setItem(i, new ItemBuilder(Material.STAINED_GLASS_PANE, 1, (byte) 7).setName("§7").build());
         }
         cookieAchievments.setItem(49, new ItemBuilder(Material.ARROW).setName("§4▰§c▰ Zurück").build());
-        cookieAchievments.setItem(19, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks Lehrling").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(20, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks Dieb").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(21, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks Ernter").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(22, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Alles meine!").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(23, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keine Hobbies").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(24, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks Meister").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(25, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Ich bekomme sie alle!").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(28, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Finger brennt!").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(29, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks Gott").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
-        cookieAchievments.setItem(30, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ KeksKlicker durchgespielt").setLore("§8§l???").setSkullTexture("eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFhNTUzOTFlZjg5YjJhNTM0YTU4ZDAxNTBmMTYyMTE3NTMxMGVhODc3MzU2MDFhZWJlOGQ2YjFkN2M1NjhiYiJ9fX0=").build());
+        cookieAchievments.setItem(19, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks-Lehrling").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(20, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks-Dieb").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(21, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keks-Ernter").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(22, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Alles meine!").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(23, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Keine Hobbies").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(24, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Meister der Kekse").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(25, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Ich bekomme sie alle!").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(28, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Finger brennt!").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(29, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ Gott der Kekse").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(30, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setName("§5▰§d▰ KeksKlicker durchgespielt").setLore("§8§l???").setSkullTexture(skullTexture).build());
+        cookieAchievments.setItem(2, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner("MHF_Question").setName("§7» §e§l??? §7«").build());
+        cookieAchievments.setItem(3, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner("MHF_Question").setName("§7» §e§l??? §7«").build());
+        cookieAchievments.setItem(4, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner("MHF_Question").setName("§7» §e§l??? §7«").build());
+        cookieAchievments.setItem(5, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner("MHF_Question").setName("§7» §e§l??? §7«").build());
+        cookieAchievments.setItem(6, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner("MHF_Question").setName("§7» §e§l??? §7«").build());
         return cookieAchievments;
     }
 

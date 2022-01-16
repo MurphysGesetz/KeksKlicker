@@ -21,7 +21,7 @@ public class Locations {
             this.cookieLocation = new Location(Bukkit.getWorld("world"), 0, 0, 0);
             Bukkit.broadcastMessage("");
             Bukkit.broadcastMessage("§4§lDie Keks-Location wurde noch nicht festgelegt!");
-            Bukkit.broadcastMessage("§eNutze dafür §6/cookie");
+            Bukkit.broadcastMessage("§eNutze dafür §6/cookie item");
             Bukkit.broadcastMessage("");
         }
 

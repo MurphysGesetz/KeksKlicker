@@ -20,7 +20,7 @@ public class CookieCommand implements CommandExecutor {
 
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (sender instanceof Player) {
-            Player player = (Player) sender;
+            final Player player = (Player) sender;
             if (player.hasPermission("cookie.command")) {
                 if (args.length == 0) {
                     player.sendMessage("§6§lKeks§e§lKlicker §f1§8.§f2§8.§f1 §cby §4§lInterpunktion");
@@ -80,12 +80,12 @@ public class CookieCommand implements CommandExecutor {
                     } else if (args[0].equalsIgnoreCase("unban")) {
                         Player target = Bukkit.getPlayer(args[1]);
                         String uuid = plugin.getMySQLTableHelper().getUniqueId(args[1] + "~");
+                        plugin.getMySQLTableHelper().setName(uuid, plugin.getMySQLTableHelper().getName(uuid).replace("~", ""));
                         if (target != null) {
                             CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().create(target);
                             cookiePlayer.updateUpgradeInventory();
                             cookiePlayer.updateAchievmentInventory();
                         }
-                        plugin.getMySQLTableHelper().setName(uuid, plugin.getMySQLTableHelper().getName(uuid).replace("~", ""));
                         player.sendMessage(Cookie.PREFIX + "Der Spieler §e" + args[1] + " §7wurde vom KeksKlicker entbannt.");
                     } else if (args[0].equalsIgnoreCase("amount")) {
                         if (plugin.getMySQLTableHelper().playerExists(args[1])) {

@@ -94,6 +94,7 @@ public class MySQLTableHelper {
             if (resultSet.next()) {
                 return resultSet.getInt("ACHIEVMENTS");
             }
+            resultSet.close();
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

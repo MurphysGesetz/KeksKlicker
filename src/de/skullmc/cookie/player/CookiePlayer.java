@@ -19,7 +19,7 @@ public class CookiePlayer {
     public CookiePlayer(UUID uuid, Cookie plugin) {
         this.plugin = plugin;
         this.uuid = uuid;
-        plugin.getMySQLTableHelper().getCookies(uuid.toString()); // it's important in the case that connection is lose...
+        plugin.getMySQLTableHelper().getCookies(uuid.toString()); // Do not remove!!
         this.cookies = plugin.getMySQLTableHelper().getCookies(uuid.toString());
         this.achievments = plugin.getMySQLTableHelper().getAchievments(uuid.toString());
         this.clickCounter = 0;

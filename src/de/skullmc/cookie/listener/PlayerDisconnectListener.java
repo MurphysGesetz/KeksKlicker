@@ -17,7 +17,7 @@ public class PlayerDisconnectListener implements Listener {
 
     @EventHandler
     public void handlePlayerDisconnect(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
         final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(player);
         if(cookiePlayer == null) return;
         plugin.getMySQLTableHelper().setCookies(player.getUniqueId().toString(), cookiePlayer.getCookies());

@@ -20,7 +20,7 @@ public class BlockPlaceListener implements Listener {
 
     @EventHandler
     public void handleBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
+        final Player player = event.getPlayer();
         if (event.getBlockPlaced().getType().equals(Material.STAINED_GLASS) && player.getItemInHand().getItemMeta().getDisplayName() != null) {
             if (player.getItemInHand().getItemMeta().getDisplayName().equals("§6▰§e▰ Keks")) {
                 plugin.getLocations().setLocation(event.getBlockPlaced().getLocation());

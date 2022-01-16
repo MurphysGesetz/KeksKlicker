@@ -16,13 +16,13 @@ public class AutomaticCookieSaver {
     public void startScheduler() {
         Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             for (Player current : Bukkit.getOnlinePlayers()) {
-                CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(current);
+                final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(current);
                 if(cookiePlayer == null) return;
                 plugin.getMySQLTableHelper().setCookies(current.getUniqueId().toString(), cookiePlayer.getCookies());
                 plugin.getMySQLTableHelper().setAchievments(current.getUniqueId().toString(), cookiePlayer.getAchievments());
             }
             for(Player current : Bukkit.getOnlinePlayers()) {
-                CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(current);
+                final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(current);
                 if(cookiePlayer == null) return;
                 cookiePlayer.updateAchievmentInventory();
             }
