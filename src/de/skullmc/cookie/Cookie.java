@@ -5,7 +5,8 @@ import de.skullmc.cookie.mysql.MySQLTableHelper;
 import de.skullmc.cookie.mysql.MySqlConnection;
 import de.skullmc.cookie.player.CookiePlayer;
 import de.skullmc.cookie.player.CookiePlayerHelper;
-import de.skullmc.cookie.utils.StoreCookieTask;
+import de.skullmc.cookie.tasks.ReduceClicksTask;
+import de.skullmc.cookie.tasks.StoreCookieTask;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
@@ -24,19 +25,18 @@ public class Cookie extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Server server = getServer();
+        final Server server = getServer();
         getConfig().options().copyDefaults(true);
         saveConfig();
-        inventoryLoader = new de.skullmc.cookie.utils.InventoryLoader();
-        inventoryCustomizer = new de.skullmc.cookie.utils.InventoryCustomizer(this);
-        cookiePlayerHelper = new CookiePlayerHelper(this);
-        titles = new de.skullmc.cookie.utils.Titles();
-        locations = new de.skullmc.cookie.utils.Locations();
-        server.getScheduler().runTaskTimerAsynchronously(this, new StoreCookieTask(this), 1200L, 6000L);
-        connectToMySQL();
-        mySqlConnection.connect();
-        init();
-        server.getScheduler().scheduleSyncRepeatingTask(this, () -> server.getOnlinePlayers().stream().filter(current -> getCookiePlayerHelper().getCookiePlayer(current) != null).forEach(current -> getCookiePlayerHelper().getCookiePlayer(current).resetClickCounter()), 60L, 100L);
+        this.inventoryLoader = new de.skullmc.cookie.utils.InventoryLoader();
+        this.inventoryCustomizer = new de.skullmc.cookie.utils.InventoryCustomizer(this);
+        this.cookiePlayerHelper = new CookiePlayerHelper(this);
+        this.titles = new de.skullmc.cookie.utils.Titles();
+        this.locations = new de.skullmc.cookie.utils.Locations();
+        connectToTheDatabase();
+        initialize(server);
+        server.getScheduler().runTaskTimerAsynchronously(this, new StoreCookieTask(this, server), 1200L, 6000L);
+        server.getScheduler().scheduleSyncRepeatingTask(this, new ReduceClicksTask(this, server), 60L, 100L);
         server.getScheduler().runTaskLater(this, () -> {
             if (!getMySqlConnection().isConnected()) return;
             for (Player current : server.getOnlinePlayers()) {
@@ -57,8 +57,8 @@ public class Cookie extends JavaPlugin {
         mySqlConnection.disconnect();
     }
 
-    private void init() {
-        PluginManager pluginManager = getServer().getPluginManager();
+    private void initialize(Server server) {
+        final PluginManager pluginManager = server.getPluginManager();
         pluginManager.registerEvents(new de.skullmc.cookie.listener.PlayerConnectionListener(this), this);
         pluginManager.registerEvents(new de.skullmc.cookie.listener.PlayerDisconnectListener(this), this);
         pluginManager.registerEvents(new de.skullmc.cookie.listener.PlayerArmorStandManipulateListener(), this);
@@ -96,13 +96,10 @@ public class Cookie extends JavaPlugin {
         return inventoryCustomizer;
     }
 
-    private void connectToMySQL() {
-        if (getConfig().getString("mysql.password").equals("12345abc")) {
-            getServer().broadcastMessage(PREFIX + "§c§lÄndere die MySQL zugangsdaten!!!");
-            return;
-        }
-        mySqlConnection = new MySqlConnection(getConfig().getString("mysql.host"), getConfig().getString("mysql.port"), getConfig().getString("mysql.database"),
-                getConfig().getString("mysql.user"), getConfig().getString("mysql.password"));
+    private void connectToTheDatabase() {
+        if (getConfig().getString("mysql.password").equals("12345abc")) return;
+        mySqlConnection = new MySqlConnection(getConfig().getString("mysql.host"), getConfig().getString("mysql.port"), getConfig().getString("mysql.database"), getConfig().getString("mysql.user"), getConfig().getString("mysql.password"));
         mySQLTableHelper = new MySQLTableHelper(this);
+        mySqlConnection.connect();
     }
 }
