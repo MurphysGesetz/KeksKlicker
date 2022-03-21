@@ -6,13 +6,9 @@ import java.util.Locale;
 
 public final class MessageFormatter {
 
-    private final DecimalFormat messageFormat;
+    public static final DecimalFormat messageFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.GERMAN);
 
-    public MessageFormatter() {
-        messageFormat = (DecimalFormat) NumberFormat.getNumberInstance(Locale.GERMAN);
-    }
-
-    public String format(final long number) {
+    public static String format(final long number) {
         return messageFormat.format(number);
     }
 }

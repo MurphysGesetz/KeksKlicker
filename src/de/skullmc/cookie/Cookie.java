@@ -5,7 +5,8 @@ import de.skullmc.cookie.mysql.MySQLTableHelper;
 import de.skullmc.cookie.mysql.MySqlConnection;
 import de.skullmc.cookie.player.CookiePlayer;
 import de.skullmc.cookie.player.CookiePlayerHelper;
-import de.skullmc.cookie.utils.MessageFormatter;
+import de.skullmc.cookie.utils.StoreCookieTask;
+import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -18,34 +19,32 @@ public class Cookie extends JavaPlugin {
     private MySqlConnection mySqlConnection;
     private de.skullmc.cookie.utils.InventoryLoader inventoryLoader;
     private MySQLTableHelper mySQLTableHelper;
-    private MessageFormatter messageFormatter;
     private CookiePlayerHelper cookiePlayerHelper;
     private de.skullmc.cookie.utils.InventoryCustomizer inventoryCustomizer;
 
     @Override
     public void onEnable() {
+        Server server = getServer();
         getConfig().options().copyDefaults(true);
         saveConfig();
         inventoryLoader = new de.skullmc.cookie.utils.InventoryLoader();
         inventoryCustomizer = new de.skullmc.cookie.utils.InventoryCustomizer(this);
-        messageFormatter = new MessageFormatter();
         cookiePlayerHelper = new CookiePlayerHelper(this);
         titles = new de.skullmc.cookie.utils.Titles();
         locations = new de.skullmc.cookie.utils.Locations();
-        de.skullmc.cookie.utils.AutomaticCookieSaver automaticCookieSaver = new de.skullmc.cookie.utils.AutomaticCookieSaver(this);
+        server.getScheduler().runTaskTimerAsynchronously(this, new StoreCookieTask(this), 1200L, 6000L);
         connectToMySQL();
         mySqlConnection.connect();
         init();
-        getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> getServer().getOnlinePlayers().stream().filter(current -> getCookiePlayerHelper().getCookiePlayer(current) != null).forEach(current -> getCookiePlayerHelper().getCookiePlayer(current).resetClickCounter()), 60L, 100L);
-        getServer().getScheduler().runTaskLater(this, () -> {
+        server.getScheduler().scheduleSyncRepeatingTask(this, () -> server.getOnlinePlayers().stream().filter(current -> getCookiePlayerHelper().getCookiePlayer(current) != null).forEach(current -> getCookiePlayerHelper().getCookiePlayer(current).resetClickCounter()), 60L, 100L);
+        server.getScheduler().runTaskLater(this, () -> {
             if (!getMySqlConnection().isConnected()) return;
-            for (Player current : getServer().getOnlinePlayers()) {
+            for (Player current : server.getOnlinePlayers()) {
                 CookiePlayer cookiePlayer = getCookiePlayerHelper().create(current);
                 cookiePlayer.updateUpgradeInventory();
                 cookiePlayer.updateAchievmentInventory();
             }
         }, 40L);
-        automaticCookieSaver.startScheduler();
     }
 
     @Override
@@ -75,10 +74,6 @@ public class Cookie extends JavaPlugin {
 
     public CookiePlayerHelper getCookiePlayerHelper() {
         return cookiePlayerHelper;
-    }
-
-    public MessageFormatter getMessageFormatter() {
-        return messageFormatter;
     }
 
     public de.skullmc.cookie.utils.Titles getTitles() {

@@ -3,6 +3,7 @@ package de.skullmc.cookie.listener;
 import de.skullmc.cookie.Cookie;
 import de.skullmc.cookie.player.CookiePlayer;
 import de.skullmc.cookie.utils.ItemBuilder;
+import de.skullmc.cookie.utils.MessageFormatter;
 import de.skullmc.cookie.utils.Particles;
 import net.minecraft.server.v1_8_R3.EnumParticle;
 import org.bukkit.Bukkit;
@@ -58,7 +59,7 @@ public class PlayerInteractListener implements Listener {
             final int cps = cookiePlayer.getClicksPerSecond();
             cookiePlayer.addCookies(cps);
             final long cookies = cookiePlayer.getCookies();
-            plugin.getTitles().sendTitle(player, "§e" + plugin.getMessageFormatter().format(cookies) + " §6Kekse", "§8+§b" + plugin.getMessageFormatter().format(cps), 20);
+            plugin.getTitles().sendTitle(player, "§e" + MessageFormatter.format(cookies) + " §6Kekse", "§8+§b" + MessageFormatter.format(cps), 20);
             if(random.nextInt(1000) < 4) {
                 player.sendMessage(Cookie.PREFIX + "§aLecker! §7Du hast einen kritischen Treffer gelandet!");
                 cookiePlayer.addCookies(cps * 10L);

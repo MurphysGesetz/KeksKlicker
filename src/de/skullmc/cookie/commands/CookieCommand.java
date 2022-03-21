@@ -3,6 +3,7 @@ package de.skullmc.cookie.commands;
 import de.skullmc.cookie.Cookie;
 import de.skullmc.cookie.player.CookiePlayer;
 import de.skullmc.cookie.utils.ItemBuilder;
+import de.skullmc.cookie.utils.MessageFormatter;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -92,9 +93,9 @@ public class CookieCommand implements CommandExecutor {
                             Player target = Bukkit.getPlayer(args[1]);
                             if (target != null) {
                                 CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(target);
-                                player.sendMessage("§8[§fIngame§8] §7Der Spieler §e" + args[1] + "§7 hat §6§l" + plugin.getMessageFormatter().format(cookiePlayer.getCookies()) + " Kekse");
+                                player.sendMessage("§8[§fIngame§8] §7Der Spieler §e" + args[1] + "§7 hat §6§l" + MessageFormatter.format(cookiePlayer.getCookies()) + " Kekse");
                             } else {
-                                player.sendMessage("§8[§fDatenbank§8] §7Der Spieler §e" + args[1] + "§7 hat §6§l" + plugin.getMessageFormatter().format(plugin.getMySQLTableHelper().getCookiesByName(args[1])) + " Kekse");
+                                player.sendMessage("§8[§fDatenbank§8] §7Der Spieler §e" + args[1] + "§7 hat §6§l" + MessageFormatter.format(plugin.getMySQLTableHelper().getCookiesByName(args[1])) + " Kekse");
                             }
                         } else {
                             player.sendMessage(Cookie.PREFIX + "Der Spieler §e" + args[1] + " §7wurde nicht gefunden.");

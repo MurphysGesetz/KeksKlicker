@@ -2,6 +2,7 @@ package de.skullmc.cookie.listener;
 
 import de.skullmc.cookie.Cookie;
 import de.skullmc.cookie.player.CookiePlayer;
+import de.skullmc.cookie.utils.MessageFormatter;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -47,43 +48,43 @@ public class InventoryClickListener implements Listener {
                         player.openInventory(plugin.getInventoryLoader().getCookieMenu());
                         break;
                     case 10:
-                        tryUpgradeBuy(player, "Helferlein", "HELPER", 40, 120);
+                        buyImprovement(player, "Helferlein", "HELPER", 40, 120);
                         break;
                     case 11:
-                        tryUpgradeBuy(player, "Alte Oma", "GRANDMA", 150, 360);
+                        buyImprovement(player, "Alte Oma", "GRANDMA", 150, 360);
                         break;
                     case 12:
-                        tryUpgradeBuy(player, "Schneller Finger", "FINGER", 5000, 7500);
+                        buyImprovement(player, "Schneller Finger", "FINGER", 5000, 7500);
                         break;
                     case 13:
-                        tryUpgradeBuy(player, "Mechanisches Huhn", "CHICKEN", 30000, 45000);
+                        buyImprovement(player, "Mechanisches Huhn", "CHICKEN", 30000, 45000);
                         break;
                     case 14:
-                        tryUpgradeBuy(player, "MiniGun", "MINIGUN", 100000, 150000);
+                        buyImprovement(player, "MiniGun", "MINIGUN", 100000, 150000);
                         break;
                     case 15:
-                        tryUpgradeBuy(player, "Profi Coder", "CODER", 500000, 750000);
+                        buyImprovement(player, "Profi Coder", "CODER", 500000, 750000);
                         break;
                     case 16:
-                        tryUpgradeBuy(player, "Recycle Plantage", "PLANTATION", 1500000, 2500000);
+                        buyImprovement(player, "Recycle Plantage", "PLANTATION", 1500000, 2500000);
                         break;
                     case 19:
-                        tryUpgradeBuy(player, "Turbine", "TURBINE", 10000000, 5000000);
+                        buyImprovement(player, "Turbine", "TURBINE", 10000000, 5000000);
                         break;
                     case 20:
-                        tryUpgradeBuy(player, "Hustler", "HUSTLER", 25000000, 10000000);
+                        buyImprovement(player, "Hustler", "HUSTLER", 25000000, 10000000);
                         break;
                     case 21:
-                        tryUpgradeBuy(player, "Chinafarmer", "CHINA", 75000000, 25000000);
+                        buyImprovement(player, "Chinafarmer", "CHINA", 75000000, 25000000);
                         break;
                     case 22:
-                        tryUpgradeBuy(player, "Atomkraftwerk", "NUCLEAR", 200000000, 150000000);
+                        buyImprovement(player, "Atomkraftwerk", "NUCLEAR", 200000000, 150000000);
                         break;
                 }
         }
     }
 
-    private void tryUpgradeBuy(Player player, String upgradeName, String columnLabel, long price, long increase) {
+    private void buyImprovement(Player player, String upgradeName, String columnLabel, long price, long increase) {
         final int alreadyBuyedAmount = plugin.getMySQLTableHelper().getUpgrade(player.getUniqueId().toString(), columnLabel);
         if (alreadyBuyedAmount < 100) {
             final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(player);
@@ -96,7 +97,7 @@ public class InventoryClickListener implements Listener {
                 player.openInventory(cookiePlayer.getUpgradeInventory());
                 cookiePlayer.calculateCookiesPerClick(player.getUniqueId().toString());
             } else {
-                player.sendMessage(Cookie.PREFIX + "§cDu hast nicht genug Kekse. §8(§e" + plugin.getMessageFormatter().format(cookiePlayer.getCookies()) + "§8/§6" + plugin.getMessageFormatter().format(priceWithIncrease) + "§8)");
+                player.sendMessage(Cookie.PREFIX + "§cDu hast nicht genug Kekse. §8(§e" + MessageFormatter.format(cookiePlayer.getCookies()) + "§8/§6" + MessageFormatter.format(priceWithIncrease) + "§8)");
                 player.playSound(player.getLocation(), Sound.VILLAGER_HIT, 1L, 1L);
             }
         } else {
