@@ -5,6 +5,7 @@ import de.skullmc.cookie.mysql.MySQLTableHelper;
 import de.skullmc.cookie.mysql.MySqlConnection;
 import de.skullmc.cookie.player.CookiePlayer;
 import de.skullmc.cookie.player.CookiePlayerHelper;
+import de.skullmc.cookie.tasks.ReconstructDataTask;
 import de.skullmc.cookie.tasks.ReduceClicksTask;
 import de.skullmc.cookie.tasks.StoreCookieTask;
 import org.bukkit.Server;
@@ -37,14 +38,7 @@ public class Cookie extends JavaPlugin {
         initialize(server);
         server.getScheduler().runTaskTimerAsynchronously(this, new StoreCookieTask(this, server), 1200L, 6000L);
         server.getScheduler().scheduleSyncRepeatingTask(this, new ReduceClicksTask(this, server), 60L, 100L);
-        server.getScheduler().runTaskLater(this, () -> {
-            if (!getMySqlConnection().isConnected()) return;
-            for (Player current : server.getOnlinePlayers()) {
-                CookiePlayer cookiePlayer = getCookiePlayerHelper().create(current);
-                cookiePlayer.updateUpgradeInventory();
-                cookiePlayer.updateAchievmentInventory();
-            }
-        }, 40L);
+        server.getScheduler().runTaskLater(this, new ReconstructDataTask(this, server), 40L);
     }
 
     @Override

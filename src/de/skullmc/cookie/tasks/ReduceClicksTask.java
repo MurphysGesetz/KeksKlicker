@@ -13,7 +13,6 @@ public class ReduceClicksTask implements Runnable{
         this.server = server;
     }
 
-
     @Override
     public void run() {
         server.getOnlinePlayers().stream().filter(current -> plugin.getCookiePlayerHelper().getCookiePlayer(current) != null)

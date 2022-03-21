@@ -55,7 +55,7 @@ public class MySqlConnection {
         return !isConnected() ? null : connection.prepareStatement(sql);
     }
 
-    private void update(String query) {
+    private void update(final String query) {
         this.executorService.execute(() -> {
             try {
                 final Statement statement = this.connection.createStatement();
