@@ -16,9 +16,10 @@ public class MySQLTableHelper {
     }
 
     public void addUpgrade(String uuid, String upgradeName) {
+        final String sql = "UPDATE upgrades SET " + upgradeName + "= ? WHERE UUID= ?";
         int nextUpgradeAmount = getUpgrade(uuid, upgradeName) + 1;
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("UPDATE upgrades SET " + upgradeName + "= ? WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setInt(1, nextUpgradeAmount);
             preparedStatement.setString(2, uuid);
             preparedStatement.executeUpdate();
@@ -28,8 +29,9 @@ public class MySQLTableHelper {
     }
 
     public void resetUpgrade(String uuid, String upgradeName) {
+        final String sql = "UPDATE upgrades SET " + upgradeName + "=0 WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("UPDATE upgrades SET " + upgradeName + "=0 WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid);
             preparedStatement.executeUpdate();
         } catch (SQLException exception) {
@@ -38,8 +40,9 @@ public class MySQLTableHelper {
     }
 
     public int getUpgrade(String uuid, String upgradeName) {
+        final String sql = "SELECT * FROM upgrades WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT * FROM upgrades WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -53,8 +56,9 @@ public class MySQLTableHelper {
     }
 
     public void setCookies(String uuid, long amount) {
+        final String sql = "UPDATE cookies SET COOKIES= ? WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("UPDATE cookies SET COOKIES= ? WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setLong(1, amount);
             preparedStatement.setString(2, uuid);
             preparedStatement.executeUpdate();
@@ -65,8 +69,9 @@ public class MySQLTableHelper {
 
 
     public void setAchievments(String uuid, int newlyAchievment) {
+        final String sql = "UPDATE achievments SET ACHIEVMENTS= ? WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("UPDATE achievments SET ACHIEVMENTS= ? WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setInt(1, newlyAchievment);
             preparedStatement.setString(2, uuid);
             preparedStatement.executeUpdate();
@@ -76,8 +81,9 @@ public class MySQLTableHelper {
     }
 
     public void setName(String uuid, String name) {
+        final String sql = "UPDATE cookies SET NAME= ? WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("UPDATE cookies SET NAME= ? WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, uuid);
             preparedStatement.executeUpdate();
@@ -87,8 +93,9 @@ public class MySQLTableHelper {
     }
 
     public int getAchievments(String uuid) {
+        final String sql = "SELECT ACHIEVMENTS FROM achievments WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT ACHIEVMENTS FROM achievments WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -102,8 +109,9 @@ public class MySQLTableHelper {
     }
 
     public Long getCookiesByName(String name) {
+        final String sql = "SELECT COOKIES FROM cookies WHERE NAME= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT COOKIES FROM cookies WHERE NAME= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, name);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -117,8 +125,9 @@ public class MySQLTableHelper {
     }
 
     public Long getCookies(String uuid) {
+        final String sql = "SELECT COOKIES FROM cookies WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT COOKIES FROM cookies WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -132,8 +141,9 @@ public class MySQLTableHelper {
     }
 
     public String getName(String uuid) {
+        final String sql = "SELECT NAME FROM cookies WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT NAME FROM cookies WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -147,8 +157,9 @@ public class MySQLTableHelper {
     }
 
     public String getUniqueId(String name) {
+        final String sql = "SELECT UUID FROM cookies WHERE NAME= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT UUID FROM cookies WHERE NAME= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, name);
             final ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -162,8 +173,9 @@ public class MySQLTableHelper {
     }
 
     public boolean playerExists(UUID uuid) {
+        final String sql = "SELECT UUID FROM cookies WHERE UUID= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT UUID FROM cookies WHERE UUID= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, uuid.toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -177,8 +189,9 @@ public class MySQLTableHelper {
     }
 
     public boolean playerExists(String name) {
+        final String sql = "SELECT NAME FROM cookies WHERE NAME= ?";
         try {
-            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("SELECT NAME FROM cookies WHERE NAME= ?");
+            final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
             preparedStatement.setString(1, name);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -194,18 +207,21 @@ public class MySQLTableHelper {
     public void createPlayer(String uuid, String name) {
         try {
             {
-                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("INSERT INTO cookies(UUID, NAME, COOKIES) VALUES (?, ?, '0')");
+                final String sql = "INSERT INTO cookies(UUID, NAME, COOKIES) VALUES (?, ?, '0')";
+                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
                 preparedStatement.setString(1, uuid);
                 preparedStatement.setString(2, name);
                 preparedStatement.executeUpdate();
             }
             {
-                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("INSERT INTO achievments(UUID, ACHIEVMENTS) VALUES (?, '0')");
+                final String sql = "INSERT INTO achievments(UUID, ACHIEVMENTS) VALUES (?, '0')";
+                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
                 preparedStatement.setString(1, uuid);
                 preparedStatement.executeUpdate();
             }
             {
-                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement("INSERT INTO upgrades(UUID,HELPER,GRANDMA,FINGER,CHICKEN,MINIGUN,CODER,PLANTATION,TURBINE,HUSTLER,CHINA,NUCLEAR) VALUES (?, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')");
+                final String sql = "INSERT INTO upgrades(UUID,HELPER,GRANDMA,FINGER,CHICKEN,MINIGUN,CODER,PLANTATION,TURBINE,HUSTLER,CHINA,NUCLEAR) VALUES (?, '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
+                final PreparedStatement preparedStatement = plugin.getMySqlConnection().getStatement(sql).join();
                 preparedStatement.setString(1, uuid);
                 preparedStatement.executeUpdate();
             }

@@ -1,6 +1,7 @@
 package de.skullmc.cookie.mysql;
 
 import java.sql.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -51,8 +52,15 @@ public class MySqlConnection {
         });
     }
 
-    public PreparedStatement getStatement(final String sql) throws SQLException {
-        return !isConnected() ? null : connection.prepareStatement(sql);
+    public CompletableFuture<PreparedStatement> getStatement(final String sql) throws SQLException {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return !isConnected() ? null : connection.prepareStatement(sql);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return null;
+        });
     }
 
     private void update(final String query) {

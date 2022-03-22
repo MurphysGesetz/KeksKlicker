@@ -24,7 +24,7 @@ public class CookieCommand implements CommandExecutor {
             final Player player = (Player) sender;
             if (player.hasPermission("cookie.command")) {
                 if (args.length == 0) {
-                    player.sendMessage("§6§lKeks§e§lKlicker §f1§8.§f2§8.§f1 §cby §4§lInterpunktion");
+                    player.sendMessage("§6§lKeks§e§lKlicker §f1§8.§f2§8.§f2 §cby §4§lInterpunktion");
                     player.sendMessage(Cookie.PREFIX + "/cookie item §8| §7gib dir den Keks-Block");
                     player.sendMessage(Cookie.PREFIX + "/cookie remove §8| §7entfern den Keks-Block");
                     player.sendMessage(Cookie.PREFIX + "/cookie ban <Spieler> §8| §7Bann einen Spieler");
