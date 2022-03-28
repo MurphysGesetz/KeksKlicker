@@ -3,7 +3,7 @@ package de.skullmc.cookie.tasks;
 import de.skullmc.cookie.Cookie;
 import org.bukkit.Server;
 
-public class ReduceClicksTask implements Runnable{
+public class ReduceClicksTask implements Runnable {
 
     private final Cookie plugin;
     private final Server server;

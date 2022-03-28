@@ -55,23 +55,10 @@ public class CookieCommand implements CommandExecutor {
                 } else if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("ban")) {
                         if (plugin.getMySQLTableHelper().playerExists(args[1])) {
-                            String uuid = plugin.getMySQLTableHelper().getUniqueId(args[1]);
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "HELPER");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "GRANDMA");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "FINGER");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "CHICKEN");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "MINIGUN");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "CODER");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "PLANTATION");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "TURBINE");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "HUSTLER");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "CHINA");
-                            plugin.getMySQLTableHelper().resetUpgrade(uuid, "NUCLEAR");
-                            plugin.getMySQLTableHelper().setName(uuid, plugin.getMySQLTableHelper().getName(uuid) + "~");
-                            plugin.getMySQLTableHelper().setCookies(uuid, 0);
-                            plugin.getMySQLTableHelper().setAchievments(uuid, 0);
                             Player target = Bukkit.getPlayer(args[1]);
                             if (target != null) {
+                                CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(target);
+                                cookiePlayer.banPlayer();
                                 plugin.getCookiePlayerHelper().remove(target);
                             }
                             player.sendMessage(Cookie.PREFIX + "Der Spieler §e" + args[1] + " §7wurde vom KeksKlicker gebannt.");
@@ -103,7 +90,7 @@ public class CookieCommand implements CommandExecutor {
                     }
                 }
             } else {
-                player.sendMessage("§6§lKeks§e§lKlicker §f1§8.§f2§8.§f1 §cby §4§lInterpunktion");
+                player.sendMessage("§6§lKeks§e§lKlicker §f1§8.§f2§8.§f2 §cby §4§lInterpunktion");
             }
         }
         return false;

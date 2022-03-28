@@ -19,7 +19,7 @@ public class StoreCookieTask implements Runnable{
 
     @Override
     public void run() {
-        Collection<? extends Player> players = server.getOnlinePlayers();
+        final Collection<? extends Player> players = server.getOnlinePlayers();
         players.forEach(current -> {
             final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(current);
             if(cookiePlayer == null) return;

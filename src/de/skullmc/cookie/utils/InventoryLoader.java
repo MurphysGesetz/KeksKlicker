@@ -18,7 +18,7 @@ public class InventoryLoader {
     private final Inventory cookieAchievments;
 
     public InventoryLoader() {
-        this.achievmentItemStacks = new ArrayList<>();
+        this.achievmentItemStacks = new ArrayList<>(10);
         loadAchievmentItemStacks();
         cookieMenu = loadCookieMenu();
         cookieUpgrades = loadCookieUpgrades();

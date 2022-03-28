@@ -43,6 +43,7 @@ public class Cookie extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        if(!mySqlConnection.isConnected()) return;
         for (Player current : getServer().getOnlinePlayers()) {
             final CookiePlayer cookiePlayer = getCookiePlayerHelper().getCookiePlayer(current);
             getMySQLTableHelper().setCookies(current.getUniqueId().toString(), cookiePlayer.getCookies());

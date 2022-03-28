@@ -56,21 +56,21 @@ public class InventoryCustomizer {
         }
         try {
             final ResultSet resultSet = plugin.getMySqlConnection().getStatement("SELECT UUID FROM cookies ORDER BY COOKIES DESC LIMIT 5").join().executeQuery();
-            final Map<Integer, String> top3Players = new HashMap<>();
+            final Map<Integer, String> top5Players = new HashMap<>(5);
             int order = 0;
             while (resultSet.next()) {
                 order++;
-                top3Players.put(order, resultSet.getString("UUID"));
+                top5Players.put(order, resultSet.getString("UUID"));
             }
             resultSet.close();
             int slot = 1;
             for (int i = 0; i < 5; i++) {
                 int id = i + 1;
                 slot++;
-                if (top3Players.get(id) == null) continue;
-                String name = plugin.getMySQLTableHelper().getName(top3Players.get(id));
+                if (top5Players.get(id) == null) continue;
+                final String name = plugin.getMySQLTableHelper().getName(top5Players.get(id));
                 inventory.setItem(slot, new ItemBuilder(Material.SKULL_ITEM, 1, (byte) 3).setSkullOwner(name).setName("§7» §e§l" + name + " §7«").setLore(
-                        "§7Ranking §8▰ §e" + id, "§7Kekse §8▰ §e" + MessageFormatter.format(plugin.getMySQLTableHelper().getCookies(top3Players.get(id))), "§7Erfolge §8▰ §e" + plugin.getMySQLTableHelper().getAchievments(top3Players.get(id))).build());
+                        "§7Ranking §8▰ §e" + id, "§7Kekse §8▰ §e" + MessageFormatter.format(plugin.getMySQLTableHelper().getCookies(top5Players.get(id))), "§7Erfolge §8▰ §e" + plugin.getMySQLTableHelper().getAchievments(top5Players.get(id))).build());
             }
         } catch (SQLException exception) {
             exception.printStackTrace();

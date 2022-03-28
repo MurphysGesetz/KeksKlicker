@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -43,18 +44,18 @@ public class PlayerInteractListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void handlePlayerInteract(PlayerInteractEvent event) {
-        final boolean result = (event.getAction().equals(Action.LEFT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_AIR) || !plugin.getLocations().getCookieLocation().equals(event.getClickedBlock().getLocation()));
+        final Block block = event.getClickedBlock();
+        final boolean result = (block == null || !plugin.getLocations().getCookieLocation().equals(block.getLocation()));
         if (result) return;
 
         final Player player = event.getPlayer();
         final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().getCookiePlayer(player);
 
         if (cookiePlayer == null) return;
-        if (cookiePlayer.getClickCounter() == 35) {
+        if (cookiePlayer.getClickCounter() > 34) {
             plugin.getTitles().sendTitle(player, "§4§l✕", "§fStopp", 20);
             return;
         }
-        cookiePlayer.addClickCounter();
         if (event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             final int cps = cookiePlayer.getClicksPerSecond();
             cookiePlayer.addCookies(cps);
@@ -71,7 +72,7 @@ public class PlayerInteractListener implements Listener {
                 player.sendMessage(Cookie.PREFIX + "Du hast den Erfolg §9" + achievmentName.get(achievmentValue) + " §7errungen!");
                 cookiePlayer.setAchievments(achievmentValue + 1);
                 cookiePlayer.updateAchievmentInventory();
-                startAchievmentAnimation(event.getClickedBlock().getLocation());
+                startAchievmentAnimation(block.getLocation());
             }
         } else {
             player.openInventory(plugin.getInventoryLoader().getCookieMenu());

@@ -95,7 +95,7 @@ public class InventoryClickListener implements Listener {
                 player.sendMessage(Cookie.PREFIX + "Du hast die Verbesserung §d" + upgradeName + " §7gekauft.");
                 cookiePlayer.updateUpgradeInventory();
                 player.openInventory(cookiePlayer.getUpgradeInventory());
-                cookiePlayer.calculateCookiesPerClick(player.getUniqueId().toString());
+                cookiePlayer.calculateCookiesPerClick();
             } else {
                 player.sendMessage(Cookie.PREFIX + "§cDu hast nicht genug Kekse. §8(§e" + MessageFormatter.format(cookiePlayer.getCookies()) + "§8/§6" + MessageFormatter.format(priceWithIncrease) + "§8)");
                 player.playSound(player.getLocation(), Sound.VILLAGER_HIT, 1L, 1L);

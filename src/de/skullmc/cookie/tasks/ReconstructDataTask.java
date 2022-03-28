@@ -19,7 +19,7 @@ public class ReconstructDataTask implements Runnable{
     public void run() {
         if (!plugin.getMySqlConnection().isConnected()) return;
         for (Player current : server.getOnlinePlayers()) {
-            CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().create(current);
+            final CookiePlayer cookiePlayer = plugin.getCookiePlayerHelper().create(current);
             cookiePlayer.updateUpgradeInventory();
             cookiePlayer.updateAchievmentInventory();
         }
