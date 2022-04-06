@@ -61,12 +61,12 @@ public class PlayerInteractListener implements Listener {
             cookiePlayer.addCookies(cps);
             final long cookies = cookiePlayer.getCookies();
             plugin.getTitles().sendTitle(player, "§e" + MessageFormatter.format(cookies) + " §6Kekse", "§8+§b" + MessageFormatter.format(cps), 20);
-            if(random.nextInt(1000) < 4) {
+            if (random.nextInt(1000) < 4) {
                 player.sendMessage(Cookie.PREFIX + "§aLecker! §7Du hast einen kritischen Treffer gelandet!");
                 cookiePlayer.addCookies(cps * 10L);
             }
             final int achievmentValue = cookiePlayer.getAchievments();
-            if(achievmentValue == 10) return;
+            if (achievmentValue == 10) return;
             if (cookies >= achievments.get(achievmentValue)) {
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1L, 1L);
                 player.sendMessage(Cookie.PREFIX + "Du hast den Erfolg §9" + achievmentName.get(achievmentValue) + " §7errungen!");
@@ -74,9 +74,9 @@ public class PlayerInteractListener implements Listener {
                 cookiePlayer.updateAchievmentInventory();
                 startAchievmentAnimation(block.getLocation());
             }
-        } else {
-            player.openInventory(plugin.getInventoryLoader().getCookieMenu());
+            return;
         }
+        player.openInventory(plugin.getInventoryLoader().getCookieMenu());
     }
 
     private void startAchievmentAnimation(Location location) {
@@ -95,12 +95,12 @@ public class PlayerInteractListener implements Listener {
                 armorStand.remove();
                 animationRunning = false;
                 Bukkit.getScheduler().cancelTask(taskID);
-            } else {
-                final Location armorStandLocation = armorStand.getLocation();
-                armorStand.teleport(new Location(armorStand.getWorld(), armorStandLocation.getX(), armorStandLocation.getY() + 0.075, armorStandLocation.getZ(), armorStandLocation.getYaw() + 15, 0));
-                Particles particles = new Particles(EnumParticle.FLAME, armorStandLocation.add(0, 0.42, 0), true, 0.05F, 0F, 0.05F, 0, 2);
-                particles.sendAll();
+                return;
             }
+            final Location armorStandLocation = armorStand.getLocation();
+            armorStand.teleport(new Location(armorStand.getWorld(), armorStandLocation.getX(), armorStandLocation.getY() + 0.075, armorStandLocation.getZ(), armorStandLocation.getYaw() + 15, 0));
+            Particles particles = new Particles(EnumParticle.FLAME, armorStandLocation.add(0, 0.42, 0), true, 0.05F, 0F, 0.05F, 0, 2);
+            particles.sendAll();
             animationStep++;
         }, 2, 2L);
     }

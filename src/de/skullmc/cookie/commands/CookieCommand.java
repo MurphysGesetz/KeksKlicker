@@ -41,8 +41,8 @@ public class CookieCommand implements CommandExecutor {
                             player.getWorld().getNearbyEntities(player.getLocation(), 3, 4, 3).forEach(current -> {
                                 if (current.getCustomName() == null) return;
                                 switch (current.getCustomName().toLowerCase()) {
-                                    case "§8▰ §6Keks§eKlicker §8▰":
-                                    case "§7Wirst du der neue Kekskönig?":
+                                    case "§8▰ §6keks§eklicker §8▰":
+                                    case "§7wirst du der neue kekskönig?":
                                     case "cookie_skull":
                                         current.remove();
                                         break;

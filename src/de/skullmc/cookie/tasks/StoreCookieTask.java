@@ -5,7 +5,7 @@ import de.skullmc.cookie.player.CookiePlayer;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.Collection;
 
 public class StoreCookieTask implements Runnable{
 

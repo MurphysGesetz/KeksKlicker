@@ -52,7 +52,7 @@ public class MySqlConnection {
         });
     }
 
-    public CompletableFuture<PreparedStatement> getStatement(final String sql) throws SQLException {
+    public CompletableFuture<PreparedStatement> getStatement(final String sql) {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 return !isConnected() ? null : connection.prepareStatement(sql);
@@ -65,12 +65,10 @@ public class MySqlConnection {
 
     private void update(final String query) {
         this.executorService.execute(() -> {
-            try {
-                final Statement statement = this.connection.createStatement();
+            try (final Statement statement = this.connection.createStatement()) {
                 statement.execute(query);
-                statement.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         });
     }

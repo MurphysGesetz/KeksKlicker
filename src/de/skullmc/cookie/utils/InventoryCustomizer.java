@@ -54,15 +54,13 @@ public class InventoryCustomizer {
         for (int i = 0; i < achievmentValue; i++) {
             inventory.setItem(plugin.getInventoryLoader().getAchievmentSlots().get(i), plugin.getInventoryLoader().getAchievmentItemStacks().get(i));
         }
-        try {
-            final ResultSet resultSet = plugin.getMySqlConnection().getStatement("SELECT UUID FROM cookies ORDER BY COOKIES DESC LIMIT 5").join().executeQuery();
+        try (final ResultSet resultSet = plugin.getMySqlConnection().getStatement("SELECT UUID FROM cookies ORDER BY COOKIES DESC LIMIT 5").join().executeQuery()) {
             final Map<Integer, String> top5Players = new HashMap<>(5);
             int order = 0;
             while (resultSet.next()) {
                 order++;
                 top5Players.put(order, resultSet.getString("UUID"));
             }
-            resultSet.close();
             int slot = 1;
             for (int i = 0; i < 5; i++) {
                 int id = i + 1;
